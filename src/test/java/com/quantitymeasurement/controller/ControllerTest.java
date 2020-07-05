@@ -154,4 +154,20 @@ public class ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(jsonResponseDTO));
     }
+
+    //TC9 -> Test case for conversion of tonne to kilogram
+    @Test
+    public void givenBaseTonneAndTargetKilogramUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
+        gson = new Gson();
+        ConvertDTO convertDTO = new ConvertDTO(1.0, TONNE, KILOGRAM);
+        String jsonConvertDTO = gson.toJson(convertDTO);
+        ResponseDTO responseDto = new ResponseDTO(1000.0, "Response Successful", 200);
+        String jsonResponseDTO = gson.toJson(responseDto);
+        when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(1000.0);
+        mockMvc.perform(post("/units/convert")
+                .content(jsonConvertDTO)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonResponseDTO));
+    }
 }
