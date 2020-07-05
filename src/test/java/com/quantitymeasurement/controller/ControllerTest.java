@@ -64,4 +64,19 @@ public class ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(jsonResponseDTO));
     }
+
+    @Test
+    public void givenBaseFeetAndTargetYardUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
+        Gson gson = new Gson();
+        ConvertDTO convertDTO = new ConvertDTO(1.0, YARD, INCH);
+        String jsonConvertDTO = gson.toJson(convertDTO);
+        ResponseDTO responseDto = new ResponseDTO(36, "Response Successful", 200);
+        String jsonResponseDTO = gson.toJson(responseDto);
+        when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(36.0);
+        mockMvc.perform(post("/units/convert")
+                .content(jsonConvertDTO)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonResponseDTO));
+    }
 }
