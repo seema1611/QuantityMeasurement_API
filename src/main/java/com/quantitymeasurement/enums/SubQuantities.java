@@ -10,7 +10,7 @@ public enum SubQuantities {
     KILOGRAM(1.0, Quantities.WEIGHT), GRAM(1d / 1000, Quantities.WEIGHT),
     TONNE(1000.0, Quantities.WEIGHT),
 
-    CELSIUS(2.12, Quantities.TEMPERATURE), FAHRENHEIT(1.0, Quantities.TEMPERATURE);
+    CELSIUS(1.80, Quantities.TEMPERATURE), FAHRENHEIT(0.56, Quantities.TEMPERATURE);
 
     public Double conversionFactor;
     public Quantities mainQuantityType;
