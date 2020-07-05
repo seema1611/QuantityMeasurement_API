@@ -138,4 +138,20 @@ public class ControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(jsonResponseDTO));
     }
+
+    //TC8 -> Test case for conversion of gram to kilogram
+    @Test
+    public void givenBaseGramAndTargetKilogramUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
+        gson = new Gson();
+        ConvertDTO convertDTO = new ConvertDTO(1.0, GRAM, KILOGRAM);
+        String jsonConvertDTO = gson.toJson(convertDTO);
+        ResponseDTO responseDto = new ResponseDTO(0.001, "Response Successful", 200);
+        String jsonResponseDTO = gson.toJson(responseDto);
+        when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(0.001);
+        mockMvc.perform(post("/units/convert")
+                .content(jsonConvertDTO)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonResponseDTO));
+    }
 }
