@@ -1,3 +1,8 @@
+/*******************************************************
+ * @purpose : Sub Quantities class used for conversion
+ * @author  : Seema Balkrishna Rajpure
+ * @Date    : 04/07/2020
+ *******************************************************/
 package com.quantitymeasurement.enums;
 
 public enum SubQuantities {

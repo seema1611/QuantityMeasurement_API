@@ -1,3 +1,8 @@
+/************************************************************************************
+ * @purpose : Quantity Measurement Controller Test for checking code using mock MVC
+ * @author  : Seema Balkrishna Rajpure
+ * @Date    : 04/07/2020
+ ************************************************************************************/
 package com.quantitymeasurement.controller;
 
 import com.google.gson.Gson;
@@ -34,6 +39,7 @@ public class ControllerTest {
     @MockBean
     private QuantityMeasurementService quantityMeasurementService;
 
+    //TC1 -> Test case for retire all main quantities
     @Test
     public void givenQuantityMeasurement_ShouldReturnAllTheMainUnits() throws Exception {
         Quantities[] array = {LENGTH, VOLUME, WEIGHT, TEMPERATURE};
@@ -42,6 +48,7 @@ public class ControllerTest {
                 .andExpect(content().json(Arrays.toString(array)));
     }
 
+    //TC2 -> Test case for retire sub quantities based on main
     @Test
     public void givenQuantityMeasurement_WhenAnyMainUnitValue_ShouldReturnAllTheSubUnits() throws Exception {
         List<SubQuantities> list = Arrays.asList(FEET, INCH, GRAM, KILOGRAM);
@@ -50,6 +57,7 @@ public class ControllerTest {
                 .andExpect(content().json(String.valueOf(list)));
     }
 
+    //TC3 -> Test case for conversion of feet to inch
     @Test
     public void givenBaseFeetAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
         Gson gson = new Gson();
@@ -65,6 +73,7 @@ public class ControllerTest {
                 .andExpect(content().json(jsonResponseDTO));
     }
 
+    //TC4 -> Test case for conversion of yard to inch
     @Test
     public void givenBaseYardAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
         Gson gson = new Gson();
@@ -80,6 +89,7 @@ public class ControllerTest {
                 .andExpect(content().json(jsonResponseDTO));
     }
 
+    //TC5 -> Test case for conversion of centimeter to inch
     @Test
     public void givenBaseCentimeterAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
         Gson gson = new Gson();
@@ -88,6 +98,22 @@ public class ControllerTest {
         ResponseDTO responseDto = new ResponseDTO(20.0, "Response Successful", 200);
         String jsonResponseDTO = gson.toJson(responseDto);
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(20.0);
+        mockMvc.perform(post("/units/convert")
+                .content(jsonConvertDTO)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonResponseDTO));
+    }
+
+    //TC6 -> Test case for conversion of gallon to liter
+    @Test
+    public void givenBaseGallonAndTargetLiterUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
+        Gson gson = new Gson();
+        ConvertDTO convertDTO = new ConvertDTO(1.0, GALLON, LITER);
+        String jsonConvertDTO = gson.toJson(convertDTO);
+        ResponseDTO responseDto = new ResponseDTO(3.78, "Response Successful", 200);
+        String jsonResponseDTO = gson.toJson(responseDto);
+        when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(3.78);
         mockMvc.perform(post("/units/convert")
                 .content(jsonConvertDTO)
                 .contentType(MediaType.APPLICATION_JSON))

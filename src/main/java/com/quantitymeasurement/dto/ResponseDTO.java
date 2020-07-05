@@ -1,3 +1,8 @@
+/*******************************************************************
+ * @purpose : Response DTO used for checking response of details
+ * @author  : Seema Balkrishna Rajpure
+ * @Date    : 04/07/2020
+ *******************************************************************/
 package com.quantitymeasurement.dto;
 
 public class ResponseDTO {
@@ -5,6 +10,12 @@ public class ResponseDTO {
     private String message;
     private Integer statusCode;
 
+    /**+
+     * @purpose : To check output response
+     * @param value
+     * @param message
+     * @param statusCode
+     */
     public ResponseDTO(double value, String message, Integer statusCode) {
         this.value = value;
         this.message = message;
