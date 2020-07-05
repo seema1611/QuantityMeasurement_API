@@ -171,15 +171,31 @@ public class ControllerTest {
                 .andExpect(content().json(jsonResponseDTO));
     }
 
-    //TC9 -> Test case for conversion of fahrenheit to celsius
+    //TC10 -> Test case for conversion of fahrenheit to celsius
     @Test
     public void givenBaseFahrenheitAndTargetCelsiusUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
         Gson gson = new Gson();
         ConvertDTO convertDTO = new ConvertDTO(202.0, FAHRENHEIT, CELSIUS);
         String jsonConvertDTO = gson.toJson(convertDTO);
-        ResponseDTO responseDto = new ResponseDTO(100, "Response Successful", 200);
+        ResponseDTO responseDto = new ResponseDTO(100.0, "Response Successful", 200);
         String jsonResponseDTO = gson.toJson(responseDto);
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(100.0);
+        mockMvc.perform(post("/units/convert")
+                .content(jsonConvertDTO)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonResponseDTO));
+    }
+
+    //TC11 -> Test case for conversion of celsius to fahrenheit
+    @Test
+    public void givenBaseCelsiusAndTargetFahrenheitUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
+        Gson gson = new Gson();
+        ConvertDTO convertDTO = new ConvertDTO(101.0, CELSIUS, FAHRENHEIT);
+        String jsonConvertDTO = gson.toJson(convertDTO);
+        ResponseDTO responseDto = new ResponseDTO(202.0, "Response Successful", 200);
+        String jsonResponseDTO = gson.toJson(responseDto);
+        when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(202.0);
         mockMvc.perform(post("/units/convert")
                 .content(jsonConvertDTO)
                 .contentType(MediaType.APPLICATION_JSON))
