@@ -39,6 +39,8 @@ public class ControllerTest {
     @MockBean
     private QuantityMeasurementService quantityMeasurementService;
 
+    Gson gson;
+
     //TC1 -> Test case for retire all main quantities
     @Test
     public void givenQuantityMeasurement_ShouldReturnAllTheMainUnits() throws Exception {
@@ -60,7 +62,7 @@ public class ControllerTest {
     //TC3 -> Test case for conversion of feet to inch
     @Test
     public void givenBaseFeetAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
-        Gson gson = new Gson();
+        gson = new Gson();
         ConvertDTO convertDTO = new ConvertDTO(1.0, FEET, INCH);
         String jsonConvertDTO = gson.toJson(convertDTO);
         ResponseDTO responseDto = new ResponseDTO(12, "Response Successful", 200);
@@ -76,7 +78,7 @@ public class ControllerTest {
     //TC4 -> Test case for conversion of yard to inch
     @Test
     public void givenBaseYardAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
-        Gson gson = new Gson();
+        gson = new Gson();
         ConvertDTO convertDTO = new ConvertDTO(1.0, YARD, INCH);
         String jsonConvertDTO = gson.toJson(convertDTO);
         ResponseDTO responseDto = new ResponseDTO(36, "Response Successful", 200);
@@ -92,7 +94,7 @@ public class ControllerTest {
     //TC5 -> Test case for conversion of centimeter to inch
     @Test
     public void givenBaseCentimeterAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
-        Gson gson = new Gson();
+        gson = new Gson();
         ConvertDTO convertDTO = new ConvertDTO(50.0, CENTIMETER, INCH);
         String jsonConvertDTO = gson.toJson(convertDTO);
         ResponseDTO responseDto = new ResponseDTO(20.0, "Response Successful", 200);
@@ -108,12 +110,28 @@ public class ControllerTest {
     //TC6 -> Test case for conversion of gallon to liter
     @Test
     public void givenBaseGallonAndTargetLiterUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
-        Gson gson = new Gson();
+        gson = new Gson();
         ConvertDTO convertDTO = new ConvertDTO(1.0, GALLON, LITER);
         String jsonConvertDTO = gson.toJson(convertDTO);
         ResponseDTO responseDto = new ResponseDTO(3.78, "Response Successful", 200);
         String jsonResponseDTO = gson.toJson(responseDto);
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(3.78);
+        mockMvc.perform(post("/units/convert")
+                .content(jsonConvertDTO)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonResponseDTO));
+    }
+
+    //TC7 -> Test case for conversion of milliliter to liter
+    @Test
+    public void givenBaseMilliliterAndTargetLiterUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
+        gson = new Gson();
+        ConvertDTO convertDTO = new ConvertDTO(1.0, MILLILITRE, LITER);
+        String jsonConvertDTO = gson.toJson(convertDTO);
+        ResponseDTO responseDto = new ResponseDTO(0.001, "Response Successful", 200);
+        String jsonResponseDTO = gson.toJson(responseDto);
+        when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(0.001);
         mockMvc.perform(post("/units/convert")
                 .content(jsonConvertDTO)
                 .contentType(MediaType.APPLICATION_JSON))

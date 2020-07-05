@@ -1,8 +1,8 @@
-/**********************************************************
+/******************************************************************
  * @purpose : Response DTO used for carries data between processes
  * @author  : Seema Balkrishna Rajpure
  * @Date    : 05/07/2020
- **********************************************************/
+ ******************************************************************/
 package com.quantitymeasurement.dto;
 
 import com.quantitymeasurement.enums.SubQuantities;
