@@ -31,4 +31,12 @@ public class QuantityServiceTest {
         List<SubQuantities> allSubQuantitiesTypes = quantityMeasurementService.getAllSubUnits(Quantities.LENGTH);
         Assert.assertEquals(4,allSubQuantitiesTypes.size());
     }
+
+    //TC3 -> Test case for retire volume subQuantities size
+    @Test
+    void givenQuantityMeasurement_WhenVolumeMainUnit_ShouldReturnAllSubUnits() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        List<SubQuantities> allSubQuantitiesTypes = quantityMeasurementService.getAllSubUnits(Quantities.VOLUME);
+        Assert.assertEquals(3,allSubQuantitiesTypes.size());
+    }
 }
