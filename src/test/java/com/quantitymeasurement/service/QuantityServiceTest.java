@@ -93,12 +93,12 @@ public class QuantityServiceTest {
         Assert.assertEquals(1.00,convertedResult,0.0);
     }
 
-    //TC10 -> Test case for convert inch to yard
+    //TC10 -> Test case for convert inch to centimeter
     @Test
-    void givenQuantityMeasurementInLength_When36InchConvertToYard_ShouldReturn1yard() {
+    void givenQuantityMeasurementInLength_When1InchConvertToCentimeter_ShouldReturn2Pt5Centimeter() {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
-        ConvertDTO convertDTO = new ConvertDTO(12.0,SubQuantities.INCH,SubQuantities.FEET);
+        ConvertDTO convertDTO = new ConvertDTO(1.0,SubQuantities.INCH,SubQuantities.CENTIMETER);
         double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
-        Assert.assertEquals(1.00,convertedResult,0.0);
+        Assert.assertEquals(2.50,convertedResult,0.0);
     }
 }
