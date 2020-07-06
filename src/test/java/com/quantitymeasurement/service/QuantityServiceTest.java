@@ -65,4 +65,13 @@ public class QuantityServiceTest {
         double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         Assert.assertEquals(12.0,convertedResult,0.0);
     }
+
+    //TC7 -> Test case for convert yard to inch
+    @Test
+    void givenQuantityMeasurementInLength_When1YardConvertToInch_ShouldReturn36Inch() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        ConvertDTO convertDTO = new ConvertDTO(1.0,SubQuantities.YARD,SubQuantities.INCH);
+        double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
+        Assert.assertEquals(36.01,convertedResult,0.0);
+    }
 }
