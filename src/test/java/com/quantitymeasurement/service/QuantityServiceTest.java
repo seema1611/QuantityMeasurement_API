@@ -83,4 +83,13 @@ public class QuantityServiceTest {
         double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         Assert.assertEquals(20.0,convertedResult,0.0);
     }
+
+    //TC9 -> Test case for convert inch to feet
+    @Test
+    void givenQuantityMeasurementInLength_When12InchConvertToFeet_ShouldReturn1Inch() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        ConvertDTO convertDTO = new ConvertDTO(12.0,SubQuantities.INCH,SubQuantities.FEET);
+        double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
+        Assert.assertEquals(1.00,convertedResult,0.0);
+    }
 }
