@@ -5,6 +5,7 @@
  *************************************************************************/
 package com.quantitymeasurement.service;
 
+import com.quantitymeasurement.dto.ConvertDTO;
 import com.quantitymeasurement.enums.Quantities;
 import com.quantitymeasurement.enums.SubQuantities;
 import com.quantitymeasurement.service.implementors.QuantityMeasurementService;
@@ -54,5 +55,14 @@ public class QuantityServiceTest {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
         List<SubQuantities> allSubQuantitiesTypes = quantityMeasurementService.getAllSubUnits(Quantities.TEMPERATURE);
         Assert.assertEquals(2,allSubQuantitiesTypes.size());
+    }
+
+    //TC6 -> Test case for convert feet to inch
+    @Test
+    void givenQuantityMeasurementInLength_When1FeetConvertToInch_ShouldReturn12Inch() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        ConvertDTO convertDTO = new ConvertDTO(1.0,SubQuantities.FEET,SubQuantities.INCH);
+        double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
+        Assert.assertEquals(12.0,convertedResult,0.0);
     }
 }
