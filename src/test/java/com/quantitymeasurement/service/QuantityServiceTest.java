@@ -129,7 +129,7 @@ public class QuantityServiceTest {
         Assert.assertEquals(212.0,convertedResult,0.0);
     }
 
-    //TC13 -> Test case for convert celsius to fahrenheit
+    //TC14 -> Test case for convert fahrenheit to celsius
     @Test
     void givenQuantityMeasurementInTemperature_When212FahrenheitConvertCelsius_ShouldReturn100Celsius() {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
