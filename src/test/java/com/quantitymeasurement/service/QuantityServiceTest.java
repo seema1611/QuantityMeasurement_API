@@ -122,10 +122,19 @@ public class QuantityServiceTest {
 
     //TC13 -> Test case for convert celsius to fahrenheit
     @Test
-    void givenQuantityMeasurementInTemperature_When0CelsiusConvertToFahrenheit_ShouldReturn32Fahrenheit() {
+    void givenQuantityMeasurementInTemperature_When100CelsiusConvertToFahrenheit_ShouldReturn212Fahrenheit() {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
         ConvertDTO convertDTO = new ConvertDTO(100.0,SubQuantities.CELSIUS,SubQuantities.FAHRENHEIT);
         double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         Assert.assertEquals(212.0,convertedResult,0.0);
+    }
+
+    //TC13 -> Test case for convert celsius to fahrenheit
+    @Test
+    void givenQuantityMeasurementInTemperature_When212FahrenheitConvertCelsius_ShouldReturn100Celsius() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        ConvertDTO convertDTO = new ConvertDTO(32.0,SubQuantities.FAHRENHEIT,SubQuantities.CELSIUS);
+        double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
+        Assert.assertEquals(0.0,convertedResult,0.0);
     }
 }
