@@ -40,12 +40,19 @@ public class QuantityServiceTest {
         Assert.assertEquals(3,allSubQuantitiesTypes.size());
     }
 
-
     //TC4 -> Test case for retire weight subQuantities size
     @Test
     void givenQuantityMeasurement_WhenWeightMainUnit_ShouldReturnAllSubUnits() {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
         List<SubQuantities> allSubQuantitiesTypes = quantityMeasurementService.getAllSubUnits(Quantities.WEIGHT);
         Assert.assertEquals(3,allSubQuantitiesTypes.size());
+    }
+
+    //TC5 -> Test case for retire temperature subQuantities size
+    @Test
+    void givenQuantityMeasurement_WhenTemperatureMainUnit_ShouldReturnAllSubUnits() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        List<SubQuantities> allSubQuantitiesTypes = quantityMeasurementService.getAllSubUnits(Quantities.TEMPERATURE);
+        Assert.assertEquals(2,allSubQuantitiesTypes.size());
     }
 }
