@@ -69,7 +69,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(1.0, FEET, INCH);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(12, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(12, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(12.0);
@@ -86,7 +86,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(1.0, YARD, INCH);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(36, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(36, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(36.0);
@@ -103,7 +103,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(50.0, CENTIMETER, INCH);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(20.0, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(20.0, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(20.0);
@@ -120,7 +120,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(1.0, GALLON, LITER);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(3.78, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(3.78, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(3.78);
@@ -137,7 +137,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(1.0, MILLILITRE, LITER);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(0.001, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(0.001, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(0.001);
@@ -154,7 +154,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(1.0, GRAM, KILOGRAM);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(0.001, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(0.001, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(0.001);
@@ -171,7 +171,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(1.0, TONNE, KILOGRAM);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(1000.0, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(1000.0, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(1000.0);
@@ -188,7 +188,7 @@ public class QuantityControllerTest {
         ConvertDTO convertDTO = new ConvertDTO(202.0, FAHRENHEIT, CELSIUS);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(100.0, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(100.0, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(100.0);
@@ -202,10 +202,10 @@ public class QuantityControllerTest {
     //TC11 -> Test case for conversion of celsius to fahrenheit
     @Test
     public void givenBaseCelsiusAndTargetFahrenheitUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
-        ConvertDTO convertDTO = new ConvertDTO(101.0, CELSIUS, FAHRENHEIT);
+        ConvertDTO convertDTO = new ConvertDTO(100.0, CELSIUS, FAHRENHEIT);
         String jsonConvertDTO = gson.toJson(convertDTO);
 
-        ResponseDTO responseDTO = new ResponseDTO(202.0, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(202.0, "Conversion Done Successfully", 200);
         String jsonResponseDTO = gson.toJson(responseDTO);
 
         when(quantityMeasurementService.getConvertedValueOfUnit(any())).thenReturn(202.0);

@@ -50,7 +50,7 @@ public class QuantityMeasurementController {
     @PostMapping("/convert")
     public ResponseEntity<ResponseDTO> convert(@RequestBody ConvertDTO convertDTO) {
         Double convertedValue = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
-        ResponseDTO responseDTO = new ResponseDTO(convertedValue, "Response Successful", 200);
+        ResponseDTO responseDTO = new ResponseDTO(convertedValue, "Conversion Done Successfully", 200);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 }
