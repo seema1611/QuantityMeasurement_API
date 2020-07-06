@@ -101,4 +101,13 @@ public class QuantityServiceTest {
         double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         Assert.assertEquals(2.50,convertedResult,0.0);
     }
+
+    //TC11 -> Test case for convert milliliter to liter
+    @Test
+    void givenQuantityMeasurementInVolume_When1000ConvertMilliliter_ShouldReturn1Liter() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        ConvertDTO convertDTO = new ConvertDTO(1000.0,SubQuantities.MILLILITRE,SubQuantities.LITER);
+        double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
+        Assert.assertEquals(1.0,convertedResult,0.0);
+    }
 }
