@@ -104,10 +104,19 @@ public class QuantityServiceTest {
 
     //TC11 -> Test case for convert milliliter to liter
     @Test
-    void givenQuantityMeasurementInVolume_When1000ConvertMilliliter_ShouldReturn1Liter() {
+    void givenQuantityMeasurementInVolume_When1000MilliliterConvertLiter_ShouldReturn1Liter() {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
         ConvertDTO convertDTO = new ConvertDTO(1000.0,SubQuantities.MILLILITRE,SubQuantities.LITER);
         double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         Assert.assertEquals(1.0,convertedResult,0.0);
+    }
+
+    //TC12 -> Test case for convert tonne to kilogram
+    @Test
+    void givenQuantityMeasurementInWeight_When1TonneConvertKilogram_ShouldReturn1000Kilogram() {
+        QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
+        ConvertDTO convertDTO = new ConvertDTO(1.0,SubQuantities.TONNE,SubQuantities.KILOGRAM);
+        double convertedResult = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
+        Assert.assertEquals(1000.0,convertedResult,0.0);
     }
 }
