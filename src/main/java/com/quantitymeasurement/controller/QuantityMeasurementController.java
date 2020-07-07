@@ -9,6 +9,7 @@ import com.quantitymeasurement.dto.ConvertDTO;
 import com.quantitymeasurement.dto.ResponseDTO;
 import com.quantitymeasurement.enums.Quantities;
 import com.quantitymeasurement.enums.SubQuantities;
+import com.quantitymeasurement.exception.QuantityMeasurementException;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,10 @@ public class QuantityMeasurementController {
      * @return : All main Quantities
      */
     @GetMapping("/mainunits")
-    public Quantities[] getAllMainQuantities() {
-        return quantityMeasurementService.getAllMainUnits();
+    public ResponseEntity getAllMainQuantities() {
+        List<Quantities> allMainUnits = quantityMeasurementService.getAllMainUnits();
+        ResponseDTO responseDTO = new ResponseDTO(allMainUnits, "Access main Successfully", 200);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     /**+
@@ -38,11 +41,10 @@ public class QuantityMeasurementController {
      * @return : Respective sub quantities
      */
     @GetMapping("/subunits")
-    public List<SubQuantities> getAllSubQuantities(@RequestParam(value = "unit") Quantities unit) {
-        return quantityMeasurementService.getAllSubUnits(unit);
-//        List<SubQuantities> allSubUnits = quantityMeasurementService.getAllSubUnits(unit);
-//        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, "Conversion Done Successfully", 200);
-//        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    public ResponseEntity getAllSubQuantities(@RequestParam(value = "unit") Quantities unit) {
+        List<SubQuantities> allSubUnits = quantityMeasurementService.getAllSubUnits(unit);
+        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, "Access sub units Successfully", 200);
+        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     /**+
@@ -51,7 +53,7 @@ public class QuantityMeasurementController {
      * @return : converted value
      */
     @PostMapping("/convert")
-    public ResponseEntity<ResponseDTO> convert(@RequestBody ConvertDTO convertDTO) {
+    public ResponseEntity<ResponseDTO> convert(@RequestBody ConvertDTO convertDTO) throws QuantityMeasurementException {
         Double convertedValue = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         ResponseDTO responseDTO = new ResponseDTO(convertedValue, "Conversion Done Successfully", 200);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);

@@ -8,6 +8,7 @@ package com.quantitymeasurement.service.implementors;
 import com.quantitymeasurement.dto.ConvertDTO;
 import com.quantitymeasurement.enums.Quantities;
 import com.quantitymeasurement.enums.SubQuantities;
+import com.quantitymeasurement.exception.QuantityMeasurementException;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,8 @@ public class QuantityMeasurementService implements IQuantityMeasurementService {
      * @return : Retire main Quantities
      */
     @Override
-    public Quantities[] getAllMainUnits() {
-        return Quantities.values();
+    public List<Quantities> getAllMainUnits() {
+        return Arrays.asList(Quantities.values());
     }
 
     /**+
@@ -45,11 +46,14 @@ public class QuantityMeasurementService implements IQuantityMeasurementService {
      * @return : Converted value
      */
     @Override
-    public Double getConvertedValueOfUnit(ConvertDTO convertDTO) {
-        if (convertDTO.baseUnit.mainQuantityType.equals(Quantities.TEMPERATURE)) {
-            return conversionForTemperatureUnits(convertDTO);
+    public Double getConvertedValueOfUnit(ConvertDTO convertDTO) throws QuantityMeasurementException {
+        if (convertDTO.baseUnit.mainQuantityType.equals(convertDTO.targetUnit.mainQuantityType)) {
+            if (convertDTO.baseUnit.mainQuantityType.equals(Quantities.TEMPERATURE)) {
+                return conversionForTemperatureUnits(convertDTO);
+            }
+            return (convertDTO.valueOfInitialUnit * convertDTO.baseUnit.conversionFactor) / convertDTO.targetUnit.conversionFactor;
         }
-        return (convertDTO.valueOfInitialUnit * convertDTO.baseUnit.conversionFactor) / convertDTO.targetUnit.conversionFactor;
+        throw new QuantityMeasurementException("Main units are different");
     }
 
     public Double conversionForTemperatureUnits(ConvertDTO convertDTO) {

@@ -12,7 +12,6 @@ import com.quantitymeasurement.service.implementors.QuantityMeasurementService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class QuantityServiceTest {
@@ -21,7 +20,7 @@ public class QuantityServiceTest {
     @Test
     void givenQuantityMeasurementMainUnits_ShouldReturnAllUnitList() {
         QuantityMeasurementService quantityMeasurementService = new QuantityMeasurementService();
-        List<Quantities> allQuantityTypes = Arrays.asList( quantityMeasurementService.getAllMainUnits());
+        List<Quantities> allQuantityTypes = (quantityMeasurementService.getAllMainUnits());
         Assert.assertEquals(4,allQuantityTypes.size());
     }
 

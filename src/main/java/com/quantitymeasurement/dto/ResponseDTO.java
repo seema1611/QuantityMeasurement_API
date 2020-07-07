@@ -5,10 +5,6 @@
  *******************************************************************/
 package com.quantitymeasurement.dto;
 
-import com.quantitymeasurement.enums.SubQuantities;
-
-import java.util.List;
-
 public class ResponseDTO {
     private Object value;
     private String message;
@@ -20,11 +16,18 @@ public class ResponseDTO {
      * @param message
      * @param statusCode
      */
-    public ResponseDTO(double value, String message, Integer statusCode) {
+    public ResponseDTO( Object value, String message, Integer statusCode) {
         this.value = value;
         this.message = message;
         this.statusCode = statusCode;
     }
+
+//    public ResponseDTO(List<Quantities> value, String message, int statusCode) {
+//        this.value = value;
+//        this.message = message;
+//        this.statusCode = statusCode;
+//    }
+
 
     public Object getValue() {
         return value;
