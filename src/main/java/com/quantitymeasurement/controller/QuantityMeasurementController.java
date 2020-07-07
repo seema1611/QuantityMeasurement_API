@@ -40,6 +40,9 @@ public class QuantityMeasurementController {
     @GetMapping("/subunits")
     public List<SubQuantities> getAllSubQuantities(@RequestParam(value = "unit") Quantities unit) {
         return quantityMeasurementService.getAllSubUnits(unit);
+//        List<SubQuantities> allSubUnits = quantityMeasurementService.getAllSubUnits(unit);
+//        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, "Conversion Done Successfully", 200);
+//        return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     /**+
