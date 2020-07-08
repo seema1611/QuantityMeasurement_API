@@ -14,6 +14,7 @@ import com.quantitymeasurement.service.IQuantityMeasurementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class QuantityMeasurementController {
     @GetMapping("/mainunits")
     public ResponseEntity getAllMainQuantities() {
         List<Quantities> allMainUnits = quantityMeasurementService.getAllMainUnits();
-        ResponseDTO responseDTO = new ResponseDTO(allMainUnits, "Access main Successfully", 200);
+        ResponseDTO responseDTO = new ResponseDTO(allMainUnits, "Access Main UnitS Successfully", 200);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
@@ -43,7 +44,7 @@ public class QuantityMeasurementController {
     @GetMapping("/subunits")
     public ResponseEntity getAllSubQuantities(@RequestParam(value = "unit") Quantities unit) {
         List<SubQuantities> allSubUnits = quantityMeasurementService.getAllSubUnits(unit);
-        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, "Access sub units Successfully", 200);
+        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, "Access Sub Units Successfully", 200);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 

@@ -8,33 +8,23 @@ package com.quantitymeasurement.controller;
 import com.google.gson.Gson;
 import com.quantitymeasurement.dto.ConvertDTO;
 import com.quantitymeasurement.dto.ResponseDTO;
-import com.quantitymeasurement.enums.Quantities;
-import com.quantitymeasurement.enums.SubQuantities;
 import com.quantitymeasurement.service.implementors.QuantityMeasurementService;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.Arrays;
-import java.util.List;
 
-import static com.quantitymeasurement.enums.Quantities.*;
 import static com.quantitymeasurement.enums.SubQuantities.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(QuantityMeasurementController.class)
 public class QuantityControllerTest {
 
     @Autowired
@@ -45,25 +35,7 @@ public class QuantityControllerTest {
 
     Gson gson = new Gson();
 
-//    //TC1 -> Test case for retire all main quantities
-//    @Test
-//    public void givenQuantityMeasurement_ShouldReturnAllTheMainUnits() throws Exception {
-//        List<Quantities> list = (LENGTH, VOLUME, WEIGHT, TEMPERATURE);
-//        given(quantityMeasurementService.getAllMainUnits()).willReturn(list);
-//        mockMvc.perform(get("/units/mainunits"))
-//                .andExpect(content().json(String.valueOf(list)));
-//    }
-
-    //TC2 -> Test case for retire sub quantities based on main
-    @Test
-    public void givenQuantityMeasurement_WhenAnyMainUnitValue_ShouldReturnAllTheSubUnits() throws Exception {
-        List<SubQuantities> list = Arrays.asList(FEET, INCH, GRAM, KILOGRAM);
-        given(quantityMeasurementService.getAllSubUnits(LENGTH)).willReturn(list);
-        mockMvc.perform(get("/units/subunits?unit=LENGTH"))
-                .andExpect(content().json(String.valueOf(list)));
-    }
-
-    //TC3 -> Test case for conversion of feet to inch
+    //TC1 -> Test case for conversion of feet to inch
     @Test
     public void givenBaseFeetAndTargetInchUnitType_WhenStatusCode200_ShouldReturnConvertedValue() throws Exception {
         ConvertDTO convertDTO = new ConvertDTO(1.0, FEET, INCH);

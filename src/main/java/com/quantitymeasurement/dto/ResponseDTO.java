@@ -22,13 +22,6 @@ public class ResponseDTO {
         this.statusCode = statusCode;
     }
 
-//    public ResponseDTO(List<Quantities> value, String message, int statusCode) {
-//        this.value = value;
-//        this.message = message;
-//        this.statusCode = statusCode;
-//    }
-
-
     public Object getValue() {
         return value;
     }

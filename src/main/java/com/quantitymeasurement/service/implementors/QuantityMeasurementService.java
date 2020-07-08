@@ -48,6 +48,7 @@ public class QuantityMeasurementService implements IQuantityMeasurementService {
     @Override
     public Double getConvertedValueOfUnit(ConvertDTO convertDTO) throws QuantityMeasurementException {
         if (convertDTO.baseUnit.mainQuantityType.equals(convertDTO.targetUnit.mainQuantityType)) {
+
             if (convertDTO.baseUnit.mainQuantityType.equals(Quantities.TEMPERATURE)) {
                 return conversionForTemperatureUnits(convertDTO);
             }

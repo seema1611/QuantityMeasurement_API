@@ -22,6 +22,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+    implementation group: 'org.hibernate.validator', name: 'hibernate-validator', version: '6.1.5.Final'
 }
 
 test {

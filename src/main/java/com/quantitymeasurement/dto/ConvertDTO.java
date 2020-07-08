@@ -7,9 +7,17 @@ package com.quantitymeasurement.dto;
 
 import com.quantitymeasurement.enums.SubQuantities;
 
+import javax.validation.constraints.NotNull;
+
+
 public class ConvertDTO {
+    @NotNull
     public Double valueOfInitialUnit;
+
+    @NotNull
     public SubQuantities baseUnit;
+
+    @NotNull
     public SubQuantities targetUnit;
 
     /**+
