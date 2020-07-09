@@ -12,6 +12,7 @@ import com.quantitymeasurement.enums.SubQuantities;
 import com.quantitymeasurement.exception.QuantityMeasurementException;
 import com.quantitymeasurement.exception.handler.QuantityMeasurementHandler;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,53 +28,58 @@ public class QuantityMeasurementController {
     IQuantityMeasurementService quantityMeasurementService;
 
     /**+
-     * @Purpose : To Retire all main quantities
+     * @Purpose : The API Used for Get list of Main units and Retire all main quantities
      * @return : All main Quantities
      */
+    @ApiOperation("You are access main units(LENGTH, VOLUME, WEIGHT, TEMPERATURE)")
     @GetMapping("/mainunits")
     public ResponseEntity getAllMainQuantities() {
         List<Quantities> allMainUnits = quantityMeasurementService.getAllMainUnits();
-        ResponseDTO responseDTO = new ResponseDTO(allMainUnits, "Access Main UnitS Successfully", 200);
+        ResponseDTO responseDTO = new ResponseDTO(allMainUnits,  QuantityMeasurementHandler.MAIN_UNITS.getMessage(), QuantityMeasurementHandler.MAIN_UNITS.getCode());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     /**+
-     * @purpose : To Retire sub quantities based on main quantities
+     * @purpose : The API Used for Get list of Sub units based on main quantities
      * @param unit
      * @return : Respective sub quantities
      */
+    @ApiOperation("You are access sub units based on main unit")
     @GetMapping("/subunits")
     public ResponseEntity getAllSubQuantities(@RequestParam(value = "unit") Quantities unit) {
         List<SubQuantities> allSubUnits = quantityMeasurementService.getAllSubUnits(unit);
-        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, "Access Sub Units Successfully", 200);
+        ResponseDTO responseDTO = new ResponseDTO(allSubUnits, QuantityMeasurementHandler.SUB_UNITS.getMessage(), QuantityMeasurementHandler.SUB_UNITS.getCode());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
     /**+
-     * @purpose : To convert data
+     * @purpose : The API Used for to convert data base unit into target unit
      * @param convertDTO
      * @return : converted value
      */
+    @ApiOperation("Convert the values base unit into target units")
     @PostMapping("/convert")
     public ResponseEntity<ResponseDTO> convert(@RequestBody ConvertDTO convertDTO) throws QuantityMeasurementException {
         Double convertedValue = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
-        ResponseDTO responseDTO = new ResponseDTO(convertedValue, "Conversion Done Successfully", 200);
+        ResponseDTO responseDTO = new ResponseDTO(convertedValue, QuantityMeasurementHandler.CONVERSION_SUCCESS.getMessage(), QuantityMeasurementHandler.CONVERSION_SUCCESS.getCode());
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
     }
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseDTO handleWrongUnitExceptions(HttpMessageNotReadableException ex) {
-        return new ResponseDTO(QuantityMeasurementHandler.INVALID_UNIT, QuantityMeasurementHandler.INTERNAL_ERROR.getMessage(),500);
+        return new ResponseDTO(null, QuantityMeasurementHandler.INVALID_UNIT.getMessage(),QuantityMeasurementHandler.INTERNAL_ERROR.getCode());
     }
+
 
     @ExceptionHandler(QuantityMeasurementException.class)
     public ResponseDTO handlerQuantityException(QuantityMeasurementException ex) {
-        return new ResponseDTO(ex.getError(), ex.getError().getMessage(),500);
+        return new ResponseDTO(ex.getHandler(), ex.getHandler().getMessage(),500);
     }
 
+
     @ExceptionHandler(Exception.class)
-    public ResponseDTO handleGenericExceptions(Exception e){
-        return new ResponseDTO(QuantityMeasurementHandler.INTERNAL_ERROR, QuantityMeasurementHandler.INTERNAL_ERROR.getMessage(),500);
+    public ResponseDTO handleGenericRExceptions(Exception e){
+        return new ResponseDTO(null, QuantityMeasurementHandler.INTERNAL_ERROR.getMessage(),QuantityMeasurementHandler.INTERNAL_ERROR.getCode());
     }
 }

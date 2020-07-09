@@ -4,17 +4,18 @@ import com.quantitymeasurement.exception.handler.QuantityMeasurementHandler;
 
 public class QuantityMeasurementException extends RuntimeException {
 
-    private QuantityMeasurementHandler error;
+    private QuantityMeasurementHandler handler;
 
-    public QuantityMeasurementException(QuantityMeasurementHandler error) {
-        this.error=error;
+
+    public QuantityMeasurementException(QuantityMeasurementHandler handler) {
+        this.handler = handler;
     }
 
-    public QuantityMeasurementHandler getError() {
-        return error;
+    public QuantityMeasurementHandler getHandler() {
+        return handler;
     }
 
-    public void setError(QuantityMeasurementHandler error) {
-        this.error=error;
+    public void setHandler(QuantityMeasurementHandler handler) {
+        this.handler = handler;
     }
 }
