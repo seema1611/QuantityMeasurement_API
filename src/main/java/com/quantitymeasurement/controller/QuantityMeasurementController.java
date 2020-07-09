@@ -68,7 +68,7 @@ public class QuantityMeasurementController {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseDTO handleWrongUnitExceptions(HttpMessageNotReadableException ex) {
-        return new ResponseDTO(null, QuantityMeasurementHandler.INVALID_UNIT.getMessage(),QuantityMeasurementHandler.INTERNAL_ERROR.getCode());
+        return new ResponseDTO(null, QuantityMeasurementHandler.INVALID_UNIT.getMessage(),QuantityMeasurementHandler.INVALID_UNIT.getCode());
     }
 
 

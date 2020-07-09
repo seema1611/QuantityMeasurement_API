@@ -29,12 +29,12 @@ public class SwaggerConfig {
 
         ApiInfo apiInfo = new ApiInfo(
                 "Quantity Measurement API",
-                "This is Quantity Measurement API",
+                "Convert One Quantity Into another Quantity",
                 "5.0",
                 "Terms of Service",
-                new Contact("Seema Balkrishna Rajpure", "htts//localhost//8082",
+                new Contact("Seema Balkrishna Rajpure", "htts://localhost:8082/v2/api-docs",
                         "seemarajpure16@gmail.com"),
-                "Spring Version 5",
+                "Apache 9.0",
                 "https://localhost/8082-ui.html"
         );
         return apiInfo;
