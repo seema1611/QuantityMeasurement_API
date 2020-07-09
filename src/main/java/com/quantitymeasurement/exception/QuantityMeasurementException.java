@@ -1,9 +1,20 @@
 package com.quantitymeasurement.exception;
 
-public class QuantityMeasurementException extends RuntimeException {
-    public String message;
+import com.quantitymeasurement.exception.handler.QuantityMeasurementHandler;
 
-    public QuantityMeasurementException(String message) {
-        this.message = message;
+public class QuantityMeasurementException extends RuntimeException {
+
+    private QuantityMeasurementHandler error;
+
+    public QuantityMeasurementException(QuantityMeasurementHandler error) {
+        this.error=error;
+    }
+
+    public QuantityMeasurementHandler getError() {
+        return error;
+    }
+
+    public void setError(QuantityMeasurementHandler error) {
+        this.error=error;
     }
 }

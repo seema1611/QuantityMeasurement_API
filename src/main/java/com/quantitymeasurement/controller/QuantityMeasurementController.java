@@ -10,6 +10,7 @@ import com.quantitymeasurement.dto.ResponseDTO;
 import com.quantitymeasurement.enums.Quantities;
 import com.quantitymeasurement.enums.SubQuantities;
 import com.quantitymeasurement.exception.QuantityMeasurementException;
+import com.quantitymeasurement.exception.handler.QuantityMeasurementHandler;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,5 +59,21 @@ public class QuantityMeasurementController {
         Double convertedValue = quantityMeasurementService.getConvertedValueOfUnit(convertDTO);
         ResponseDTO responseDTO = new ResponseDTO(convertedValue, "Conversion Done Successfully", 200);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseDTO handleWrongUnitExceptions(HttpMessageNotReadableException ex) {
+        return new ResponseDTO(QuantityMeasurementHandler.INVALID_UNIT, QuantityMeasurementHandler.INTERNAL_ERROR.getMessage(),500);
+    }
+
+    @ExceptionHandler(QuantityMeasurementException.class)
+    public ResponseDTO handlerQuantityException(QuantityMeasurementException ex) {
+        return new ResponseDTO(ex.getError(), ex.getError().getMessage(),500);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseDTO handleGenericExceptions(Exception e){
+        return new ResponseDTO(QuantityMeasurementHandler.INTERNAL_ERROR, QuantityMeasurementHandler.INTERNAL_ERROR.getMessage(),500);
     }
 }

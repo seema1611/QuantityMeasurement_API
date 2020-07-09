@@ -9,6 +9,7 @@ import com.quantitymeasurement.dto.ConvertDTO;
 import com.quantitymeasurement.enums.Quantities;
 import com.quantitymeasurement.enums.SubQuantities;
 import com.quantitymeasurement.exception.QuantityMeasurementException;
+import com.quantitymeasurement.exception.handler.QuantityMeasurementHandler;
 import com.quantitymeasurement.service.IQuantityMeasurementService;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +55,7 @@ public class QuantityMeasurementService implements IQuantityMeasurementService {
             }
             return (convertDTO.valueOfInitialUnit * convertDTO.baseUnit.conversionFactor) / convertDTO.targetUnit.conversionFactor;
         }
-        throw new QuantityMeasurementException("Main units are different");
+        throw new QuantityMeasurementException(QuantityMeasurementHandler.DIFFERENT_MAIN_UNIT);
     }
 
     public Double conversionForTemperatureUnits(ConvertDTO convertDTO) {
